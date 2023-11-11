@@ -25,22 +25,40 @@ public class MecanumDrive extends OpMode {
                 speed * gamepad1.right_stick_x
         );
 
+        while (gamepad1.right_stick_x == -1) {
+            hardware.frontLeft.setPower(1);
+            hardware.backLeft.setPower(1);
+            hardware.frontRight.setPower(-1);
+            hardware.backRight.setPower(-1);
+        } while (gamepad1.right_stick_x == 1) {
+            hardware.frontLeft.setPower(-1);
+            hardware.backLeft.setPower(-1);
+            hardware.frontRight.setPower(1);
+            hardware.backRight.setPower(1);
+        }
+
 
         // Configures the speed of the robot based on the bumpers pressed
         if (gamepad1.right_bumper) {
             speed += 0.05;
+            telemetry.addLine("Speed is " + speed);
         }
         if (gamepad1.left_bumper) {
             speed -= 0.05;
+            telemetry.addLine("Speed is " + speed);
         }
         speed = Math.max(0, Math.min(speed, 1));
 
         if (gamepad1.a) {
-            hardware.swivelArm.setPower(1);
+            hardware.swivelArm.setPower(0.1);
         }
 
         if (gamepad1.b) {
             hardware.swivelArm.setPower(0);
+        }
+
+        if (gamepad1.y) {
+            hardware.swivelArm.setPower(-0.4);
         }
 
         if (gamepad1.dpad_up) {
@@ -53,10 +71,16 @@ public class MecanumDrive extends OpMode {
 
         if (gamepad1.x) {
             hardware.bucketClaw.setPosition(1);
+        } else {
+            hardware.bucketClaw.setPosition(0);
         }
 
-        if (gamepad1.y) {
-            hardware.bucketClaw.setPosition(0);
+        if (gamepad1.dpad_right) {
+            hardware.intake.setPower(1);
+        } else if (gamepad1.dpad_left) {
+            hardware.intake.setPower(-1);
+        } else {
+            hardware.intake.setPower(0);
         }
 
     }

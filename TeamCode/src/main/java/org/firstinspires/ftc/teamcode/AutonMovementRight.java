@@ -27,7 +27,10 @@ public class AutonMovementRight extends LinearOpMode {
         sleep(3000);
 
         hardware.moveAllMotors(0);
+        hardware.intake.setPower(-1);
 
+        sleep(5000);
 
+        hardware.intake.setPower(0);
     }
 }

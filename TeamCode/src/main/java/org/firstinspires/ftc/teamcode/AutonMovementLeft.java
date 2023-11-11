@@ -15,6 +15,7 @@ public class AutonMovementLeft extends LinearOpMode {
         hardware = new Hardware(this);
 
         waitForStart();
+
         hardware.moveAllMotors(0.5);
 
         sleep(1000);
@@ -27,6 +28,11 @@ public class AutonMovementLeft extends LinearOpMode {
         sleep(3000);
 
         hardware.moveAllMotors(0);
+        hardware.intake.setPower(-1);
+
+        sleep(5000);
+
+        hardware.intake.setPower(0);
 
 
     }

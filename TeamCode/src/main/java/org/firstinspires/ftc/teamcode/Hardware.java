@@ -22,6 +22,7 @@ public class Hardware {
     public final DcMotor swivelArm;
     public final DcMotor linearExtension;
     public final Servo bucketClaw;
+    public final DcMotor intake;
 
     public Hardware(OpMode opMode) {
         HardwareMap hwMap = opMode.hardwareMap;
@@ -35,10 +36,12 @@ public class Hardware {
         this.swivelArm = hwMap.get(DcMotor.class, "swivelMotor");
         this.linearExtension = hwMap.get(DcMotor.class, "linearExtensionMotor");
         this.bucketClaw = hwMap.get(Servo.class, "bucketClaw");
+        this.intake = hwMap.get(DcMotor.class, "intakeMotor");
 
         // Reverse right motors to ensure robot moves forward
         this.frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         this.backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.linearExtension.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set braking behavior on motors
         this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

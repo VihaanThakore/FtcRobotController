@@ -7,6 +7,8 @@ public class MecanumDrive extends OpMode {
     Hardware hardware;
     double speed = 0.5;
 
+    double servoPos= 0;
+
     @Override
     public void init() {
 
@@ -25,16 +27,19 @@ public class MecanumDrive extends OpMode {
                 speed * gamepad1.right_stick_x
         );
 
-        while (gamepad1.right_stick_x == -1) {
+        if (gamepad1.right_stick_x == -1) {
             hardware.frontLeft.setPower(1);
             hardware.backLeft.setPower(1);
             hardware.frontRight.setPower(-1);
             hardware.backRight.setPower(-1);
-        } while (gamepad1.right_stick_x == 1) {
+        }
+        else if (gamepad1.right_stick_x == 1) {
             hardware.frontLeft.setPower(-1);
             hardware.backLeft.setPower(-1);
             hardware.frontRight.setPower(1);
             hardware.backRight.setPower(1);
+        } else {
+            hardware.moveAllMotors(0);
         }
 
 
@@ -70,8 +75,6 @@ public class MecanumDrive extends OpMode {
         }
 
         if (gamepad1.x) {
-            hardware.bucketClaw.setPosition(1);
-        } else {
             hardware.bucketClaw.setPosition(0);
         }
 
@@ -81,6 +84,14 @@ public class MecanumDrive extends OpMode {
             hardware.intake.setPower(-1);
         } else {
             hardware.intake.setPower(0);
+        }
+
+        if (gamepad1.right_stick_y != 0) {
+            hardware.bucketClaw.setPosition(servoPos);
+            hardware.linearExtension.setPower(gamepad1.right_stick_y);
+            servoPos += 0.05;
+        } else {
+            servoPos = 0;
         }
 
     }

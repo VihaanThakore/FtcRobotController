@@ -69,7 +69,7 @@ public class Hardware {
     public void moveDriveTrain(Double lY, Double lX, Double rX) {
         double vertical;
         double horizontal;
-        double  pivot;
+        double pivot;
         vertical = -lY;
         horizontal = lX;
         pivot = rX;

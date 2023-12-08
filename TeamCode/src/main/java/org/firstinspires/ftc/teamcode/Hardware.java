@@ -19,7 +19,7 @@ public class Hardware {
     public final DcMotor frontRight;
     public final DcMotor backLeft;
     public final DcMotor backRight;
-    public final DcMotor swivelArm;
+    //public final DcMotor swivelArm;
     public final DcMotor linearExtension;
     public final Servo bucketClaw;
     public final DcMotor intake;
@@ -33,7 +33,7 @@ public class Hardware {
         this.frontRight = hwMap.get(DcMotor.class, "frontRightMotor");
         this.backLeft = hwMap.get(DcMotor.class, "backLeftMotor");
         this.backRight = hwMap.get(DcMotor.class, "backRightMotor");
-        this.swivelArm = hwMap.get(DcMotor.class, "swivelMotor");
+        //this.swivelArm = hwMap.get(DcMotor.class, "swivelMotor");
         this.linearExtension = hwMap.get(DcMotor.class, "linearExtensionMotor");
         this.bucketClaw = hwMap.get(Servo.class, "bucketClaw");
         this.intake = hwMap.get(DcMotor.class, "intakeMotor");

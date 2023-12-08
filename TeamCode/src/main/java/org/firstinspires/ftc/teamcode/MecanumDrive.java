@@ -54,7 +54,7 @@ public class MecanumDrive extends OpMode {
         }
         speed = Math.max(0, Math.min(speed, 1));
 
-        if (gamepad1.a) {
+        /* if (gamepad1.a) {
             hardware.swivelArm.setPower(0.1);
         }
 
@@ -64,18 +64,22 @@ public class MecanumDrive extends OpMode {
 
         if (gamepad1.y) {
             hardware.swivelArm.setPower(-0.4);
-        }
+        } */
 
+        // Moves swiveling arm up and down
         if (gamepad1.dpad_up) {
+            hardware.bucketClaw.setPosition(servoPos);
             hardware.linearExtension.setPower(0.5);
+            servoPos += 0.05;
         } else if (gamepad1.dpad_down) {
             hardware.linearExtension.setPower(-0.5);
+            servoPos -= 0.05;
         } else {
             hardware.linearExtension.setPower(0);
         }
 
         if (gamepad1.x) {
-            hardware.bucketClaw.setPosition(0);
+            servoPos = 0.0;
         }
 
         if (gamepad1.dpad_right) {
@@ -86,13 +90,7 @@ public class MecanumDrive extends OpMode {
             hardware.intake.setPower(0);
         }
 
-        if (gamepad1.right_stick_y != 0) {
-            hardware.bucketClaw.setPosition(servoPos);
-            hardware.linearExtension.setPower(gamepad1.right_stick_y);
-            servoPos += 0.05;
-        } else {
-            servoPos = 0;
-        }
+        hardware.bucketClaw.setPosition(servoPos);
 
     }
 

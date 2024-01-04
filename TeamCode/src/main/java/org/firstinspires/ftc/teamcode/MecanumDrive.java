@@ -7,8 +7,6 @@ public class MecanumDrive extends OpMode {
     Hardware hardware;
     double speed = 0.5;
 
-    double servoPos= 0;
-
     @Override
     public void init() {
 

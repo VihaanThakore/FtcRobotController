@@ -13,7 +13,7 @@ public class EncoderDrive extends OpMode {
 
     double newTarget;
 
-    int executeCommmand = 0;
+    int executeCommand = 2;
 
     @Override
     public void init() {
@@ -64,6 +64,21 @@ public class EncoderDrive extends OpMode {
         } else {
             hwMap.bucketClaw.setPosition(0);
             hwMap.bucketClaw1.setPosition(0);
+        }
+
+        if (gamepad1.y) {
+            executeCommand += 1;
+            // Alternates directions of intakes
+            if (executeCommand % 3 == 0) {
+                hwMap.intakeOne.setPower(0.5);
+                hwMap.intakeTwo.setPower(0.5);
+            } else if (executeCommand % 3 == 1) {
+                hwMap.intakeOne.setPower(-0.5);
+                hwMap.intakeTwo.setPower(-0.5);
+            } else if (executeCommand %3 == 2) {
+                hwMap.intakeOne.setPower(0);
+                hwMap.intakeOne.setPower(0);
+            }
         }
     }
 

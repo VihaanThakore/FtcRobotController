@@ -27,22 +27,6 @@ public class MecanumDrive extends OpMode {
                 speed * gamepad1.right_stick_x
         );
 
-        if (gamepad1.right_stick_x == -1) {
-            hardware.frontLeft.setPower(1);
-            hardware.backLeft.setPower(1);
-            hardware.frontRight.setPower(-1);
-            hardware.backRight.setPower(-1);
-        }
-        else if (gamepad1.right_stick_x == 1) {
-            hardware.frontLeft.setPower(-1);
-            hardware.backLeft.setPower(-1);
-            hardware.frontRight.setPower(1);
-            hardware.backRight.setPower(1);
-        } else {
-            hardware.moveAllMotors(0);
-        }
-
-
         // Configures the speed of the robot based on the bumpers pressed
         if (gamepad1.right_bumper) {
             speed += 0.05;
@@ -67,30 +51,34 @@ public class MecanumDrive extends OpMode {
         } */
 
         // Moves swiveling arm up and down
-        if (gamepad1.dpad_up) {
-            hardware.bucketClaw.setPosition(servoPos);
+       /* if (gamepad1.dpad_up) {
             hardware.linearExtension.setPower(0.5);
-            servoPos += 0.05;
+
         } else if (gamepad1.dpad_down) {
             hardware.linearExtension.setPower(-0.5);
-            servoPos -= 0.05;
         } else {
             hardware.linearExtension.setPower(0);
+            hardware.bucketClaw.setPosition(0.5);
+        }*/
+        if (gamepad1.x) {
+            hardware.bucketClaw.setPosition(0.5);
+        }
+        if (gamepad1.y){
+            hardware.bucketClaw.setPosition(1);
         }
 
-        if (gamepad1.x) {
-            servoPos = 0.0;
-        }
 
         if (gamepad1.dpad_right) {
-            hardware.intake.setPower(1);
+            hardware.intakeOne.setPower(1);
+            //hardware.intakeTwo.setPower(-1);
         } else if (gamepad1.dpad_left) {
-            hardware.intake.setPower(-1);
+            hardware.intakeOne.setPower(-1);
+            //hardware.intakeTwo.setPower(1);
         } else {
-            hardware.intake.setPower(0);
+            hardware.intakeOne.setPower(0);
+            //hardware.intakeTwo.setPower(0);
         }
 
-        hardware.bucketClaw.setPosition(servoPos);
 
     }
 

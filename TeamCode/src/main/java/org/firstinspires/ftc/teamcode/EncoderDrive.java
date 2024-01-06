@@ -13,7 +13,7 @@ public class EncoderDrive extends OpMode {
 
     double newTarget;
 
-    int executeCommand = 2;
+    int executeCommand = 0;
 
     @Override
     public void init() {
@@ -21,6 +21,7 @@ public class EncoderDrive extends OpMode {
         hwMap = new Hardware(this);
         hwMap.swivelArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hwMap.swivelArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        telemetry.addLine("Speed is" + speed);
 
     }
 
@@ -36,7 +37,7 @@ public class EncoderDrive extends OpMode {
 
         // Speed adjustment
         if (gamepad1.right_bumper) {
-            speed += 0.05;
+            speed = speed + 0.05;
             telemetry.addLine("Speed is" + speed);
         }
 
@@ -67,18 +68,25 @@ public class EncoderDrive extends OpMode {
         }
 
         if (gamepad1.y) {
-            executeCommand += 1;
             // Alternates directions of intakes
+            // Eats pixels when pressed once
+            // Spits pixels out when pressed twice
+            // Stops moving when pressed 3 times
             if (executeCommand % 3 == 0) {
                 hwMap.intakeOne.setPower(0.5);
-                hwMap.intakeTwo.setPower(0.5);
+                //hwMap.intakeTwo.setPower(0.5);
+                executeCommand = 1;
+                stop();
             } else if (executeCommand % 3 == 1) {
                 hwMap.intakeOne.setPower(-0.5);
-                hwMap.intakeTwo.setPower(-0.5);
-            } else if (executeCommand %3 == 2) {
+                //hwMap.intakeTwo.setPower(-0.5);
+                executeCommand = 2;
+            } else if (executeCommand % 3 == 2) {
                 hwMap.intakeOne.setPower(0);
-                hwMap.intakeOne.setPower(0);
+                //hwMap.intakeOne.setPower(0);
+                executeCommand = 0;
             }
+            telemetry.addLine("Execute Command is " + executeCommand);
         }
     }
 
@@ -88,7 +96,7 @@ public class EncoderDrive extends OpMode {
         hwMap.swivelArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         newTarget = revolutionPosition * ticks;
         hwMap.swivelArm.setTargetPosition((int)newTarget);
-        hwMap.swivelArm.setPower(0.2);
+        hwMap.swivelArm.setPower(0.05);
         hwMap.swivelArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

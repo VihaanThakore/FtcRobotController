@@ -26,7 +26,7 @@ public class Hardware {
     public final DcMotor intakeOne;
     //public final DcMotor secondLinearExtension;
 
-    public final DcMotor intakeTwo;
+    //public final DcMotor intakeTwo;
 
     public Hardware(OpMode opMode) {
         HardwareMap hwMap = opMode.hardwareMap;
@@ -45,7 +45,7 @@ public class Hardware {
         this.bucketClaw1 = hwMap.get(Servo.class, "bucketClaw1");
 
         this.intakeOne = hwMap.get(DcMotor.class, "intakeOneMotor");
-        this.intakeTwo = hwMap.get(DcMotor.class, "intakeTwoMotor");
+        //this.intakeTwo = hwMap.get(DcMotor.class, "intakeTwoMotor");
 
         // Reverse right motors to ensure robot moves forward
         this.frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
